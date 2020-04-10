@@ -35,3 +35,4 @@ build/
 # IntelliJ project files
 out
 gen
+!/src/test/
