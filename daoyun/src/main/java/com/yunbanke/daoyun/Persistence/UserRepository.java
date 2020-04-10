@@ -1,5 +1,6 @@
 package com.yunbanke.daoyun.Persistence;
 
+import com.yunbanke.daoyun.Domain.entity.Account;
 import com.yunbanke.daoyun.Domain.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

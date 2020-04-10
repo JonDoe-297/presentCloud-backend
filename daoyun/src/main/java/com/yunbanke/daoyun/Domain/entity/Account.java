@@ -1,84 +1,87 @@
 package com.yunbanke.daoyun.Domain.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 // 账户表
 @Entity
 public class Account {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
-    private Integer account_id;
+    @Column(name = "account_id")
+    private Integer accountid;
     // 对应用户id
-    private Integer user_id;
+    @Column(name = "user_id")
+    private Integer userid;
     // 登录账号
-    private String login_account;
+    @Column(name = "login_account")
+    private String loginaccount;
     // 登录邮箱
-    private String login_email;
+    @Column(name = "login_email")
+    private String loginemail;
     // 登录手机号
-    private String login_phone;
+    @Column(name = "login_phone")
+    private String loginphone;
     // 登录密码（md5）
-    private String login_passwd;
+    @Column(name = "login_passwd")
+    private String loginpasswd;
 
     @Override
     public String toString() {
         return "Account{" +
-                "account_id=" + account_id +
-                ", user_id=" + user_id +
-                ", login_account='" + login_account + '\'' +
-                ", login_email='" + login_email + '\'' +
-                ", login_phone='" + login_phone + '\'' +
-                ", login_passwd='" + login_passwd + '\'' +
+                "account_id=" + accountid +
+                ", user_id=" + userid +
+                ", login_account='" + loginaccount + '\'' +
+                ", login_email='" + loginemail + '\'' +
+                ", login_phone='" + loginphone + '\'' +
+                ", login_passwd='" + loginpasswd + '\'' +
                 '}';
     }
 
-    public Integer getAccount_id() {
-        return account_id;
+    public Integer getAccountid() {
+        return accountid;
     }
 
-    public void setAccount_id(Integer account_id) {
-        this.account_id = account_id;
+    public void setAccountid(Integer accountid) {
+        this.accountid = accountid;
     }
 
-    public Integer getUser_id() {
-        return user_id;
+    public Integer getUserid() {
+        return userid;
     }
 
-    public void setUser_id(Integer user_id) {
-        this.user_id = user_id;
+    public void setUserid(Integer userid) {
+        this.userid = userid;
     }
 
-    public String getLogin_account() {
-        return login_account;
+    public String getLoginaccount() {
+        return loginaccount;
     }
 
-    public void setLogin_account(String login_account) {
-        this.login_account = login_account;
+    public void setLoginaccount(String loginaccount) {
+        this.loginaccount = loginaccount;
     }
 
-    public String getLogin_email() {
-        return login_email;
+    public String getLoginemail() {
+        return loginemail;
     }
 
-    public void setLogin_email(String login_email) {
-        this.login_email = login_email;
+    public void setLoginemail(String loginemail) {
+        this.loginemail = loginemail;
     }
 
-    public String getLogin_phone() {
-        return login_phone;
+    public String getLoginphone() {
+        return loginphone;
     }
 
-    public void setLogin_phone(String login_phone) {
-        this.login_phone = login_phone;
+    public void setLoginphone(String loginphone) {
+        this.loginphone = loginphone;
     }
 
-    public String getLogin_passwd() {
-        return login_passwd;
+    public String getLoginpasswd() {
+        return loginpasswd;
     }
 
-    public void setLogin_passwd(String login_passwd) {
-        this.login_passwd = login_passwd;
+    public void setLoginpasswd(String loginpasswd) {
+        this.loginpasswd = loginpasswd;
     }
 }
