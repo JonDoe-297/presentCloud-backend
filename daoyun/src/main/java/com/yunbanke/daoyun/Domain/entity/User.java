@@ -1,12 +1,6 @@
 package com.yunbanke.daoyun.Domain.entity;
 
-import lombok.Data;
-import org.springframework.context.annotation.Primary;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -14,7 +8,7 @@ public class User {
 
     @GeneratedValue(strategy=GenerationType.AUTO)
     @Id
-    private Integer id;
+    private Integer user_id;
     private String user_name;
     // 昵称
     private String user_nickname;
@@ -32,11 +26,25 @@ public class User {
     private Integer user_isdelete;
     // 用户角色（role_id）
     private Integer role_id;
+    // 用户登录信息
+    @OneToOne(cascade = CascadeType.ALL) // 关系维护端
+    @JoinTable(name = "user_account",
+        joinColumns = @JoinColumn(name = "user_id"),
+        inverseJoinColumns = @JoinColumn(name = "account_id"))
+    private Account account;
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
 
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
+                "user_id=" + user_id +
                 ", user_name='" + user_name + '\'' +
                 ", user_nickname='" + user_nickname + '\'' +
                 ", user_birthday=" + user_birthday +
@@ -49,12 +57,12 @@ public class User {
                 '}';
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getUser_id() {
+        return user_id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setUser_id(Integer user_id) {
+        this.user_id = user_id;
     }
 
     public String getUser_name() {
