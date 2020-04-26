@@ -1,9 +1,7 @@
 package com.yunbanke.daoyun.Domain.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Class {
@@ -18,6 +16,10 @@ public class Class {
     // 班课号
     private String class_num;
 
+    @ManyToMany
+    @JoinTable(name="class_student", joinColumns = @JoinColumn(name = "class_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private List<User> studentList;
+
     @Override
     public String toString() {
         return "Class{" +
@@ -27,6 +29,14 @@ public class Class {
                 ", class_member=" + class_member +
                 ", class_num='" + class_num + '\'' +
                 '}';
+    }
+
+    public List<User> getStudentList() {
+        return studentList;
+    }
+
+    public void setStudentList(List<User> studentList) {
+        this.studentList = studentList;
     }
 
     public Integer getClass_id() {

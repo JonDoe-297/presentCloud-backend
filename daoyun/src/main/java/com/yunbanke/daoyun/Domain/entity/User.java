@@ -2,6 +2,7 @@ package com.yunbanke.daoyun.Domain.entity;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class User {
@@ -42,6 +43,17 @@ public class User {
         joinColumns = @JoinColumn(name = "user_id"),
         inverseJoinColumns = @JoinColumn(name = "account_id"))
     private Account account;
+
+    @ManyToMany(mappedBy = "studentList")
+    private List<Class> classList;
+
+    public List<Class> getClassList() {
+        return classList;
+    }
+
+    public void setClassList(List<Class> classList) {
+        this.classList = classList;
+    }
 
     public Account getAccount() {
         return account;
