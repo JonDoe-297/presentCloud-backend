@@ -39,9 +39,9 @@ public class User {
     private Integer roleid;
     // 用户登录信息
     @OneToOne(cascade = CascadeType.ALL) // 关系维护端
-    @JoinTable(name = "user_account",
-        joinColumns = @JoinColumn(name = "user_id"),
-        inverseJoinColumns = @JoinColumn(name = "account_id"))
+//    @JoinTable(name = "user_account",
+//        joinColumns = @JoinColumn(name = "user_id"),
+//        inverseJoinColumns = @JoinColumn(name = "account_id"))
     private Account account;
 
     @ManyToMany(mappedBy = "studentList")

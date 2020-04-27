@@ -10,8 +10,8 @@ public class Account {
     @Column(name = "account_id")
     private Integer accountid;
     // 对应用户id
-    @Column(name = "user_id")
-    private Integer userid;
+//    @Column(name = "user_id")
+//    private Integer userid;
     // 登录账号
     @Column(name = "login_account")
     private String loginaccount;
@@ -24,12 +24,21 @@ public class Account {
     // 登录密码（md5）
     @Column(name = "login_passwd")
     private String loginpasswd;
+    @OneToOne(mappedBy = "account")
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     @Override
     public String toString() {
         return "Account{" +
                 "account_id=" + accountid +
-                ", user_id=" + userid +
                 ", login_account='" + loginaccount + '\'' +
                 ", login_email='" + loginemail + '\'' +
                 ", login_phone='" + loginphone + '\'' +
@@ -45,13 +54,13 @@ public class Account {
         this.accountid = accountid;
     }
 
-    public Integer getUserid() {
-        return userid;
-    }
-
-    public void setUserid(Integer userid) {
-        this.userid = userid;
-    }
+//    public Integer getUserid() {
+//        return userid;
+//    }
+//
+//    public void setUserid(Integer userid) {
+//        this.userid = userid;
+//    }
 
     public String getLoginaccount() {
         return loginaccount;
