@@ -1,10 +1,10 @@
 package com.yunbanke.daoyun.infrastructure.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Role {
@@ -17,6 +17,42 @@ public class Role {
     private Date role_createtime;
     // 角色描述
     private String role_description;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_role", joinColumns = {@JoinColumn(name = "role_id")},
+            inverseJoinColumns = {@JoinColumn(name = "user_Id")})
+    private List<User> userList;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "role_access", joinColumns = {@JoinColumn(name = "role_id")},
+            inverseJoinColumns = {@JoinColumn(name = "access_id")})
+    private List<Access> accessList;
+
+
+    @Transient
+    public Set<String> getAccessName() {
+        Set<String> set = new HashSet<>();
+        List<Access> accessList = getAccessList();
+        for (Access access : accessList) {
+            set.add(access.getAccess_name());
+        }
+        return set;
+    }
+
+    public List<User> getUserList() {
+        return userList;
+    }
+
+    public void setUserList(List<User> userList) {
+        this.userList = userList;
+    }
+
+    public List<Access> getAccessList() {
+        return accessList;
+    }
+
+    public void setAccessList(List<Access> accessList) {
+        this.accessList = accessList;
+    }
 
     @Override
     public String toString() {

@@ -1,9 +1,7 @@
 package com.yunbanke.daoyun.infrastructure.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 // 用户权限表
 @Entity
@@ -15,6 +13,8 @@ public class Access {
     private String access_detail;
     // 权限状态
     private Integer access_state;
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "accessList")
+    private List<Role> roles;
 
     @Override
     public String toString() {

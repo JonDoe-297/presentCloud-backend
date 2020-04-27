@@ -2,7 +2,9 @@ package com.yunbanke.daoyun.infrastructure.entity;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class User {
@@ -35,8 +37,12 @@ public class User {
     @Column(name = "user_isdelete")
     private Integer userisdelete;
     // 用户角色（role_id）
-    @Column(name = "role_id")
-    private Integer roleid;
+//    @Column(name = "role_id")
+//    private Integer roleid;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_role", joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "role_Id")})
+    private List<Role> roleList;
     // 用户登录信息
     @OneToOne(cascade = CascadeType.ALL) // 关系维护端
 //    @JoinTable(name = "user_account",
@@ -46,6 +52,16 @@ public class User {
 
     @ManyToMany(mappedBy = "studentList")
     private List<Class> classList;
+
+
+    @Transient
+    public Set<String> getRolesName() {
+        Set<String> roles = new LinkedHashSet<>();
+        for (Role role : roleList) {
+            roles.add(role.getRole_name());
+        }
+        return roles;
+    }
 
     public List<Class> getClassList() {
         return classList;
@@ -75,7 +91,6 @@ public class User {
                 ", user_school=" + userschool +
                 ", user_sno='" + usersno + '\'' +
                 ", user_isdelete=" + userisdelete +
-                ", role_id=" + roleid +
                 '}';
     }
 
@@ -151,11 +166,11 @@ public class User {
         this.userisdelete = userisdelete;
     }
 
-    public Integer getRoleid() {
-        return roleid;
+    public List<Role> getRoleList() {
+        return roleList;
     }
 
-    public void setRoleid(Integer roleid) {
-        this.roleid = roleid;
+    public void setRoleList(List<Role> roleList) {
+        this.roleList = roleList;
     }
 }
