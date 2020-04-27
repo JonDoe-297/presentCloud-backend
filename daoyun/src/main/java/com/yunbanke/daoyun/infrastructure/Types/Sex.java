@@ -1,4 +1,4 @@
-package com.yunbanke.daoyun.Types;
+package com.yunbanke.daoyun.infrastructure.Types;
 
 import lombok.Data;
 

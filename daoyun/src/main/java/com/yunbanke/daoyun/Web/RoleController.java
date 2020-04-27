@@ -1,9 +1,8 @@
 package com.yunbanke.daoyun.Web;
 
-import com.yunbanke.daoyun.Domain.entity.Role;
-import com.yunbanke.daoyun.Persistence.RoleRepository;
+import com.yunbanke.daoyun.infrastructure.entity.Role;
+import com.yunbanke.daoyun.infrastructure.Persistence.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;

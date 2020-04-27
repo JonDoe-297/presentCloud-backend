@@ -1,8 +1,8 @@
 package com.yunbanke.daoyun.Web;
 
-import com.yunbanke.daoyun.Domain.entity.Account;
-import com.yunbanke.daoyun.Domain.entity.User;
-import com.yunbanke.daoyun.Persistence.UserRepository;
+import com.yunbanke.daoyun.infrastructure.entity.Account;
+import com.yunbanke.daoyun.infrastructure.entity.User;
+import com.yunbanke.daoyun.infrastructure.Persistence.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;

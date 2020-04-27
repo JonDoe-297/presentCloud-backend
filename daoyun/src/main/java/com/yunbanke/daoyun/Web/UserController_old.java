@@ -1,7 +1,7 @@
 //package com.yunbanke.daoyun.Web;
 //
-//import com.yunbanke.daoyun.Domain.entity.User;
-//import com.yunbanke.daoyun.Persistence.UserRepository;
+//import com.yunbanke.daoyun.infrastructure.entity.User;
+//import com.yunbanke.daoyun.infrastructure.Persistence.UserRepository;
 //import org.springframework.jdbc.core.metadata.HsqlTableMetaDataProvider;
 //import org.springframework.ui.Model;
 //import org.slf4j.Logger;

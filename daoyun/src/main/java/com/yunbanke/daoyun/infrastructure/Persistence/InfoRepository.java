@@ -1,6 +1,6 @@
-package com.yunbanke.daoyun.Persistence;
+package com.yunbanke.daoyun.infrastructure.Persistence;
 
-import com.yunbanke.daoyun.Domain.entity.Info;
+import com.yunbanke.daoyun.infrastructure.entity.Info;
 import org.springframework.data.repository.CrudRepository;
 
 public interface InfoRepository extends CrudRepository<Info, Integer> {

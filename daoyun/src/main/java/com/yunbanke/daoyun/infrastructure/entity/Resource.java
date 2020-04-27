@@ -1,4 +1,4 @@
-package com.yunbanke.daoyun.Domain.entity;
+package com.yunbanke.daoyun.infrastructure.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
