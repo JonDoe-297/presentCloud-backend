@@ -7,14 +7,19 @@ import java.util.List;
 public class Class {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
-    private Integer class_id;
+    @Column(name = "class_id")
+    private Integer classid;
     // 班课创建者 对应user_id
-    private Integer user_id;
-    private String class_name;
+    @Column(name = "user_id")
+    private Integer userid;
+    @Column(name = "class_name")
+    private String classname;
     // 班课成员数量
-    private Integer class_member;
+    @Column(name = "class_member")
+    private Integer classmember;
     // 班课号
-    private String class_num;
+    @Column(name = "class_num")
+    private String classnum;
 
     @ManyToMany
     @JoinTable(name="class_student", joinColumns = @JoinColumn(name = "class_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
@@ -23,11 +28,11 @@ public class Class {
     @Override
     public String toString() {
         return "Class{" +
-                "class_id=" + class_id +
-                ", class_creator=" + user_id +
-                ", class_name='" + class_name + '\'' +
-                ", class_member=" + class_member +
-                ", class_num='" + class_num + '\'' +
+                "class_id=" + classid +
+                ", class_creator=" + userid +
+                ", class_name='" + classname + '\'' +
+                ", class_member=" + classmember +
+                ", class_num='" + classnum + '\'' +
                 '}';
     }
 
@@ -39,43 +44,43 @@ public class Class {
         this.studentList = studentList;
     }
 
-    public Integer getClass_id() {
-        return class_id;
+    public Integer getClassid() {
+        return classid;
     }
 
-    public void setClass_id(Integer class_id) {
-        this.class_id = class_id;
+    public void setClassid(Integer classid) {
+        this.classid = classid;
     }
 
-    public Integer getUser_id() {
-        return user_id;
+    public Integer getUserid() {
+        return userid;
     }
 
-    public void setUser_id(Integer user_id) {
-        this.user_id = user_id;
+    public void setUserid(Integer userid) {
+        this.userid = userid;
     }
 
-    public String getClass_name() {
-        return class_name;
+    public String getClassname() {
+        return classname;
     }
 
-    public void setClass_name(String class_name) {
-        this.class_name = class_name;
+    public void setClassname(String classname) {
+        this.classname = classname;
     }
 
-    public Integer getClass_member() {
-        return class_member;
+    public Integer getClassmember() {
+        return classmember;
     }
 
-    public void setClass_member(Integer class_member) {
-        this.class_member = class_member;
+    public void setClassmember(Integer classmember) {
+        this.classmember = classmember;
     }
 
-    public String getClass_num() {
-        return class_num;
+    public String getClassnum() {
+        return classnum;
     }
 
-    public void setClass_num(String class_num) {
-        this.class_num = class_num;
+    public void setClassnum(String classnum) {
+        this.classnum = classnum;
     }
 }

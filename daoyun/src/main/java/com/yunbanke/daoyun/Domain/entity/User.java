@@ -1,5 +1,7 @@
 package com.yunbanke.daoyun.Domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -44,6 +46,7 @@ public class User {
         inverseJoinColumns = @JoinColumn(name = "account_id"))
     private Account account;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "studentList")
     private List<Class> classList;
 
