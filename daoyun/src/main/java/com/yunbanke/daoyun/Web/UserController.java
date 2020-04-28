@@ -1,15 +1,21 @@
 package com.yunbanke.daoyun.Web;
 
-import com.yunbanke.daoyun.Domain.entity.Account;
-import com.yunbanke.daoyun.Domain.entity.User;
-import com.yunbanke.daoyun.Persistence.UserRepository;
+import com.yunbanke.daoyun.infrastructure.Persistence.AccountRepository;
+import com.yunbanke.daoyun.infrastructure.Response.CommonReturnType;
+import com.yunbanke.daoyun.infrastructure.entity.Account;
+import com.yunbanke.daoyun.infrastructure.entity.User;
+import com.yunbanke.daoyun.infrastructure.Persistence.UserRepository;
+import org.apache.shiro.crypto.hash.SimpleHash;
+import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
+import java.util.List;
 
 @RequestMapping("/user")
 @RestController
@@ -17,24 +23,27 @@ import java.util.Date;
 public class UserController {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private AccountRepository accountRepository;
 
-    @GetMapping(path = "/addUser")
-    public void addUser(){
+    @GetMapping(path = "user/register")
+    public String addUser(String username, String password, Model model) {
         User user = new User();
-        Account account = new Account();
-        user.setUseraddress("测试——用户地址。");
-        user.setUserbirthday(new Date());
-        user.setUserisdelete(0);
-        user.setUsername("张翊卓");
-        user.setUsernation(86);
-        user.setUsernickname("zyz");
-        user.setUserschool(88);
-        user.setUsersno("190322222");
-        account.setLoginaccount("123213231");
-        account.setLoginemail("text@test.com");
-        account.setLoginpasswd("testpassword");
-        account.setLoginphone("13111111111");
+        Account account = accountRepository.findAccountByLoginphone(username);
+        if (account != null) {
+            model.addAttribute("msg", "账号存在");
+            return "register";
+        }
+        account = new Account();
+        account.setLoginphone(username);
+        //用用户的电话作为加密密码的盐
+        ByteSource salt = ByteSource.Util.bytes(username);
+        String newPsd = new SimpleHash("MD5", password, salt, 3).toHex();
+        account.setLoginpasswd(newPsd);
         user.setAccount(account);
-        userRepository.save(user);
+        user = userRepository.saveAndFlush(user);
+
+        model.addAttribute("data", CommonReturnType.create(user));
+        return "index";
     }
 }
