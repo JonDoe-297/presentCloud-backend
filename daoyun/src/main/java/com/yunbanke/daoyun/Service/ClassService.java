@@ -1,9 +1,10 @@
 package com.yunbanke.daoyun.Service;
 
-import com.yunbanke.daoyun.Domain.entity.Class;
-import com.yunbanke.daoyun.Domain.entity.User;
-import com.yunbanke.daoyun.Persistence.ClassRepository;
+
 import com.yunbanke.daoyun.Persistence.UserRepository;
+import com.yunbanke.daoyun.infrastructure.Persistence.ClassRepository;
+import com.yunbanke.daoyun.infrastructure.entity.Class;
+import com.yunbanke.daoyun.infrastructure.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,8 +1,9 @@
 package com.yunbanke.daoyun.Web;
 
-import com.yunbanke.daoyun.Domain.entity.Class;
-import com.yunbanke.daoyun.Domain.entity.User;
+
 import com.yunbanke.daoyun.Service.ClassService;
+import com.yunbanke.daoyun.infrastructure.entity.Class;
+import com.yunbanke.daoyun.infrastructure.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
