@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -54,8 +55,6 @@ public class ClassController {
 
     // TODO 查询课程
 
-
-    // TODO 添加签到 签到课程、时间、签到记录、成员签到列表、签到结果
 
 
     // TODO 上传资源、课程、权限

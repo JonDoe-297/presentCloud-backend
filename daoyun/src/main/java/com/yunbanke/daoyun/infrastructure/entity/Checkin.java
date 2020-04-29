@@ -1,9 +1,6 @@
 package com.yunbanke.daoyun.infrastructure.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 // 签到表
@@ -11,63 +8,68 @@ import java.util.Date;
 public class Checkin {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
-    private Integer checkin_id;
+    @Column(name = "checkin_id")
+    private Integer checkinid;
     // 是否签到
-    private Integer checkin_is;
+    @Column(name = "checkin_is")
+    private Integer checkinis;
     // 签到日期
-    private Date checkin_date;
+    @Column(name = "checkin_date")
+    private Date checkindate;
     // 签到用户
-    private Integer user_id;
-    private String class_num;
+    @Column(name = "user_id")
+    private Integer userid;
+    @Column(name = "class_num")
+    private String classnum;
 
     @Override
     public String toString() {
         return "Info{" +
-                "checkin_id=" + checkin_id +
-                ", checkin_is=" + checkin_is +
-                ", checkin_date=" + checkin_date +
-                ", checkin_user_id='" + user_id + '\'' +
-                ", checkin_class='" + class_num + '\'' +
+                "checkin_id=" + checkinid +
+                ", checkin_is=" + checkinis +
+                ", checkin_date=" + checkindate +
+                ", checkin_user_id='" + userid + '\'' +
+                ", checkin_class='" + classnum + '\'' +
                 '}';
     }
 
-    public Integer getCheckin_id() {
-        return checkin_id;
+    public Integer getCheckinid() {
+        return checkinid;
     }
 
-    public void setCheckin_id(Integer checkin_id) {
-        this.checkin_id = checkin_id;
+    public void setCheckinid(Integer checkinid) {
+        this.checkinid = checkinid;
     }
 
-    public Integer getCheckin_is() {
-        return checkin_is;
+    public Integer getCheckinis() {
+        return checkinis;
     }
 
-    public void setCheckin_is(Integer checkin_is) {
-        this.checkin_is = checkin_is;
+    public void setCheckinis(Integer checkinis) {
+        this.checkinis = checkinis;
     }
 
-    public Date getCheckin_date() {
-        return checkin_date;
+    public Date getCheckindate() {
+        return checkindate;
     }
 
-    public void setCheckin_date(Date checkin_date) {
-        this.checkin_date = checkin_date;
+    public void setCheckindate(Date checkindate) {
+        this.checkindate = checkindate;
     }
 
-    public Integer getUser_id() {
-        return user_id;
+    public Integer getUserid() {
+        return userid;
     }
 
-    public void setUser_id(Integer user_id) {
-        this.user_id = user_id;
+    public void setUserid(Integer userid) {
+        this.userid = userid;
     }
 
-    public String getClass_num() {
-        return class_num;
+    public String getClassnum() {
+        return classnum;
     }
 
-    public void setClass_num(String class_num) {
-        this.class_num = class_num;
+    public void setClassnum(String classnum) {
+        this.classnum = classnum;
     }
 }
