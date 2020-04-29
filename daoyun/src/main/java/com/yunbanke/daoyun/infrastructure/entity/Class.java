@@ -1,10 +1,11 @@
 package com.yunbanke.daoyun.infrastructure.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
-public class Class {
+public class Class implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     @Column(name = "class_id")

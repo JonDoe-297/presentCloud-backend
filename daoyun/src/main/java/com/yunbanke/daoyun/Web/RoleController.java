@@ -15,12 +15,11 @@ public class RoleController {
     private RoleRepository roleRepository;
 
     @RequestMapping("/addRole")
-    public void addRole(){
+    public void addRole(String name, String description) {
         Role role = new Role();
         role.setRole_createtime(new Date());
-        role.setRole_description("just description");
-        role.setRole_name("just name.");
-        System.out.println(role.getRole_name());
+        role.setRole_description(description);
+        role.setRole_name(name);
         roleRepository.save(role);
     }
 }

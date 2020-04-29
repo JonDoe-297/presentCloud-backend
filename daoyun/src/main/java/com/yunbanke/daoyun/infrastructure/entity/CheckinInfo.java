@@ -2,11 +2,12 @@ package com.yunbanke.daoyun.infrastructure.entity;
 
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 // 签到信息表
 @Entity
-public class CheckinInfo {
+public class CheckinInfo implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     @Column(name = "checkin_info_id")

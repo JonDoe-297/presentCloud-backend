@@ -26,24 +26,4 @@ public class UserController {
     @Autowired
     private AccountRepository accountRepository;
 
-    @GetMapping(path = "user/register")
-    public String addUser(String username, String password, Model model) {
-        User user = new User();
-        Account account = accountRepository.findAccountByLoginphone(username);
-        if (account != null) {
-            model.addAttribute("msg", "账号存在");
-            return "register";
-        }
-        account = new Account();
-        account.setLoginphone(username);
-        //用用户的电话作为加密密码的盐
-        ByteSource salt = ByteSource.Util.bytes(username);
-        String newPsd = new SimpleHash("MD5", password, salt, 3).toHex();
-        account.setLoginpasswd(newPsd);
-        user.setAccount(account);
-        user = userRepository.saveAndFlush(user);
-
-        model.addAttribute("data", CommonReturnType.create(user));
-        return "index";
-    }
 }

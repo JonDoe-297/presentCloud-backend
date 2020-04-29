@@ -3,15 +3,16 @@ package com.yunbanke.daoyun.infrastructure.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
 @Entity
-public class User {
+public class User implements Serializable {
 
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     @Column(name = "user_id")
     private Integer userid;
@@ -41,7 +42,7 @@ public class User {
     // 用户角色（role_id）
 //    @Column(name = "role_id")
 //    private Integer roleid;
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_role", joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "role_Id")})
     private List<Role> roleList;

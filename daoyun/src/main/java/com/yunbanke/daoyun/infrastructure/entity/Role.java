@@ -1,13 +1,14 @@
 package com.yunbanke.daoyun.infrastructure.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 @Entity
-public class Role {
+public class Role implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     private Integer role_id;
@@ -22,7 +23,7 @@ public class Role {
             inverseJoinColumns = {@JoinColumn(name = "user_Id")})
     private List<User> userList;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "role_access", joinColumns = {@JoinColumn(name = "role_id")},
             inverseJoinColumns = {@JoinColumn(name = "access_id")})
     private List<Access> accessList;

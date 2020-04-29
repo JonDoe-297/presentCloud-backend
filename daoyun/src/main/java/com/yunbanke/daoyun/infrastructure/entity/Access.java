@@ -1,11 +1,12 @@
 package com.yunbanke.daoyun.infrastructure.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 // 用户权限表
 @Entity
-public class Access {
+public class Access implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     private Integer access_id;
