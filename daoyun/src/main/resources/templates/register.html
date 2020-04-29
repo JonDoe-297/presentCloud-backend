@@ -11,6 +11,14 @@
 <form th:action="@{/register}" method="post">
     <p>电话: <input type="text" name="username"/></p>
     <p>密码: <input type="text" name="password"/></p>
+    <label>姓名：</label><label><input type="text" name="name"></label>
+    <label>学号：</label><label><input type="text" name="sno"></label>
+    <label>
+        <select name="role">
+            <option value="student">我是学生</option>
+            <option value="teacher">我是教师</option>
+        </select>
+    </label>
     <p><input type="submit"></p>
 </form>
 </body>

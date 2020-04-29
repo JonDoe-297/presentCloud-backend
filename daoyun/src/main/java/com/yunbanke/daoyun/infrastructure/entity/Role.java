@@ -18,7 +18,7 @@ public class Role implements Serializable {
     private Date role_createtime;
     // 角色描述
     private String role_description;
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
     @JoinTable(name = "user_role", joinColumns = {@JoinColumn(name = "role_id")},
             inverseJoinColumns = {@JoinColumn(name = "user_Id")})
     private List<User> userList;

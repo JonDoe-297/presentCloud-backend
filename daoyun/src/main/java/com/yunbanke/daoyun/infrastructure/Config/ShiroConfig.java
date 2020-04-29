@@ -28,6 +28,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/static/**", "anon"); //静态资源所有人都可以访问，这样前端的css，JavaScript等代码才能被访问到
         filterChainDefinitionMap.put("/login", "anon"); //登录url所有人都可以访问
         filterChainDefinitionMap.put("/toRegister", "anon");
+        filterChainDefinitionMap.put("/register", "anon");
         //filterChainDefinitionMap.put("/teacher/createClass", "authc");
         filterChainDefinitionMap.put("/logout", "logout");//登出url，登出操作shiro已经写好，只需要在前端跳转到该url
         filterChainDefinitionMap.put("/**", "authc"); //剩下的所有页面都需要认证过才能访问。这一行必须放在最后，放在前面所有的资源都被拦截了
