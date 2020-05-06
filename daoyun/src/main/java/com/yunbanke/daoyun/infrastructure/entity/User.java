@@ -32,7 +32,9 @@ public class User implements Serializable {
     private String useraddress;
     // 所在学校
     @Column(name = "user_school")
-    private Integer userschool;
+    private String userschool;
+    @Column(name = "user_department")
+    private String userDepartment;
     // 学号/工号
     @Column(name = "user_sno")
     private String usersno;
@@ -67,6 +69,18 @@ public class User implements Serializable {
         return roles;
     }
 
+    public void setUserschool(String userschool) {
+        this.userschool = userschool;
+    }
+
+    public String getUserDepartment() {
+        return userDepartment;
+    }
+
+    public void setUserDepartment(String userDepartment) {
+        this.userDepartment = userDepartment;
+    }
+
     public List<Class> getClassList() {
         return classList;
     }
@@ -86,15 +100,15 @@ public class User implements Serializable {
     @Override
     public String toString() {
         return "User{" +
-                "user_id=" + userid +
-                ", user_name='" + username + '\'' +
-                ", user_nickname='" + usernickname + '\'' +
-                ", user_birthday=" + userbirthday +
-                ", user_nation=" + usernation +
-                ", user_address='" + useraddress + '\'' +
-                ", user_school=" + userschool +
-                ", user_sno='" + usersno + '\'' +
-                ", user_isdelete=" + userisdelete +
+                "userid=" + userid +
+                ", username='" + username + '\'' +
+                ", usernickname='" + usernickname + '\'' +
+                ", userbirthday=" + userbirthday +
+                ", usernation=" + usernation +
+                ", useraddress='" + useraddress + '\'' +
+                ", userschool='" + userschool + '\'' +
+                ", userDepartment='" + userDepartment + '\'' +
+                ", usersno='" + usersno + '\'' +
                 '}';
     }
 
@@ -146,13 +160,13 @@ public class User implements Serializable {
         this.useraddress = useraddress;
     }
 
-    public Integer getUserschool() {
-        return userschool;
-    }
-
-    public void setUserschool(Integer userschool) {
-        this.userschool = userschool;
-    }
+//    public Integer getUserschool() {
+//        return userschool;
+//    }
+//
+//    public void setUserschool(Integer userschool) {
+//        this.userschool = userschool;
+//    }
 
     public String getUsersno() {
         return usersno;
