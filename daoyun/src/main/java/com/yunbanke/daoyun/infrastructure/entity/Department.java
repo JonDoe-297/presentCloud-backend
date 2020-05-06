@@ -2,11 +2,13 @@ package com.yunbanke.daoyun.infrastructure.entity;
 
 
 import javax.persistence.*;
+import javax.swing.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name = "department")
-public class Department {
+public class Department implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "department_id")
@@ -15,7 +17,7 @@ public class Department {
     @Column(name = "department_name")
     private String department_name;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "departmentList")
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "departmentList", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<School> schoolList;
 
     public Department() {

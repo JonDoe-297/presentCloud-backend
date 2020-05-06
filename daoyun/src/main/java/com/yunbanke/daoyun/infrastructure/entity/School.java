@@ -2,6 +2,7 @@ package com.yunbanke.daoyun.infrastructure.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -15,7 +16,7 @@ public class School implements Serializable {
     @Column(name = "school_name")
     private String school_name;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "school_department", joinColumns = {@JoinColumn(name = "school_id")},
             inverseJoinColumns = {@JoinColumn(name = "department_id")})
     private List<Department> departmentList;
