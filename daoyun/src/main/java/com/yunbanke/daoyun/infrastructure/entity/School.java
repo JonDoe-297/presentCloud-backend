@@ -1,5 +1,8 @@
 package com.yunbanke.daoyun.infrastructure.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -16,6 +19,8 @@ public class School implements Serializable {
     @Column(name = "school_name")
     private String school_name;
 
+    @JSONField(serialize = false)
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "school_department", joinColumns = {@JoinColumn(name = "school_id")},
             inverseJoinColumns = {@JoinColumn(name = "department_id")})

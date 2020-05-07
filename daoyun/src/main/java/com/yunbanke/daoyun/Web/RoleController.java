@@ -20,6 +20,6 @@ public class RoleController {
         role.setRole_createtime(new Date());
         role.setRole_description(description);
         role.setRole_name(name);
-        roleRepository.save(role);
+        roleRepository.saveAndFlush(role);
     }
 }

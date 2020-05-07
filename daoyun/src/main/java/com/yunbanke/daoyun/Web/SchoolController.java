@@ -1,7 +1,11 @@
 package com.yunbanke.daoyun.Web;
 
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.yunbanke.daoyun.Web.VO.DepartmentVO;
+import com.yunbanke.daoyun.Web.VO.SchoolVO;
 import com.yunbanke.daoyun.infrastructure.Persistence.DepartmentRepository;
 import com.yunbanke.daoyun.infrastructure.Persistence.SchoolRepository;
 import com.yunbanke.daoyun.infrastructure.Response.CommonReturnType;
@@ -34,7 +38,8 @@ public class SchoolController {
 
     @GetMapping("/getByPage")
     @ResponseBody
-    public Page<School> getSchoolByPage(int curPage) {
+    public Page<School> getSchoolByPage(@RequestBody JSONObject jsonObject) {
+        int curPage = jsonObject.getIntValue("page");
         Pageable pageable;
         pageable = PageRequest.of(curPage - 1, 10);
         return schoolRepository.findAll(pageable);
@@ -42,8 +47,9 @@ public class SchoolController {
 
     @PostMapping("/addSchool")
     @ResponseBody
-    public CommonReturnType add(String school_name) {
+    public CommonReturnType add(@RequestBody JSONObject jsonObject) {
         School school = new School();
+        String school_name = jsonObject.getString("school_name");
         school.setSchool_name(school_name);
         school = schoolRepository.saveAndFlush(school);
         return CommonReturnType.create(school);
@@ -51,7 +57,9 @@ public class SchoolController {
 
     @PostMapping("/addDepartment")
     @ResponseBody
-    public CommonReturnType addDep(String school_name, String department_name) {
+    public CommonReturnType addDep(@RequestBody JSONObject jsonObject) {
+        String department_name = jsonObject.getString("department_name");
+        String school_name = jsonObject.getString("school_name");
         Department department = new Department();
         department.setDepartment_name(department_name);
         School school = schoolRepository.findSchoolByschool_name(school_name);

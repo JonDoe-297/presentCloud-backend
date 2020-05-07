@@ -1,6 +1,9 @@
 package com.yunbanke.daoyun.infrastructure.entity;
 
 
+import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.swing.*;
 import java.io.Serializable;
@@ -17,6 +20,8 @@ public class Department implements Serializable {
     @Column(name = "department_name")
     private String department_name;
 
+    @JSONField(serialize = false)
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "departmentList", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<School> schoolList;
 
