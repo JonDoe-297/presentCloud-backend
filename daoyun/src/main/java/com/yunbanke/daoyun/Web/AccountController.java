@@ -57,39 +57,40 @@ public class AccountController {
             model.addAttribute("name", user.getUsername());
             return "index";
         } catch (AuthenticationException error) {
+            model.addAttribute("msg", "账户或密码错误");
             return "login";
         }
     }
-//
-//    @RequestMapping("/toRegister")
-//    public String toRegister() {
-//        return "register";
-//    }
-//
-//    @PostMapping(path = "/register")
-//    public String register(String username, String password, String name, String sno, String role, Model model) {
-//        User user = new User();
-//        Account account = accountRepository.findAccountByLoginphone(username);
-//        if (account != null) {
-//            model.addAttribute("msg", "账号存在");
-//            return "register";
-//        }
-//        account = new Account();
-//        account.setLoginphone(username);
-//        //用用户的电话作为加密密码的盐
-//        ByteSource salt = ByteSource.Util.bytes(username);
-//        String newPsd = new SimpleHash("MD5", password, salt, 3).toHex();
-//        account.setLoginpasswd(newPsd);
-//        List<Role> roleList = roleRepository.getRolesByName(role);
-//        user.setAccount(account);
-//        user.setUsersno(sno);
-//        user.setUsername(name);
-//        user.setRoleList(roleList);
-//        userRepository.saveAndFlush(user);
-//
-//        model.addAttribute("meg", "注册成功");
-//        System.out.println("注册成功");
-//        return "login";
-//    }
-//
+
+    @RequestMapping("/toRegister")
+    public String toRegister() {
+        return "register";
+    }
+
+    @PostMapping(path = "/register")
+    public String register(String username, String password, String name, String sno, String role, Model model) {
+        User user = new User();
+        Account account = accountRepository.findAccountByLoginphone(username);
+        if (account != null) {
+            model.addAttribute("msg", "账号存在");
+            return "register";
+        }
+        account = new Account();
+        account.setLoginphone(username);
+        //用用户的电话作为加密密码的盐
+        ByteSource salt = ByteSource.Util.bytes(username);
+        String newPsd = new SimpleHash("MD5", password, salt, 3).toHex();
+        account.setLoginpasswd(newPsd);
+        List<Role> roleList = roleRepository.getRolesByName(role);
+        user.setAccount(account);
+        user.setUsersno(sno);
+        user.setUsername(name);
+        user.setRoleList(roleList);
+        userRepository.saveAndFlush(user);
+
+        model.addAttribute("meg", "注册成功");
+        //System.out.println("注册成功");
+        return "login";
+    }
+
 }

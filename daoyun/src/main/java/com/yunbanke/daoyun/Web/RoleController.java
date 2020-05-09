@@ -9,7 +9,7 @@ import java.util.Date;
 
 @RequestMapping("/role")
 @RestController
-@CrossOrigin
+//@CrossOrigin
 public class RoleController {
     @Autowired
     private RoleRepository roleRepository;
