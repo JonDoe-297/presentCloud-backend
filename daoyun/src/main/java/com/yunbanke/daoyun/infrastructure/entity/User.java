@@ -1,5 +1,6 @@
 package com.yunbanke.daoyun.infrastructure.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -47,6 +48,7 @@ public class User implements Serializable {
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_role", joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "role_Id")})
+    @JsonBackReference
     private List<Role> roleList;
     // 用户登录信息
     @OneToOne(cascade = CascadeType.ALL) // 关系维护端

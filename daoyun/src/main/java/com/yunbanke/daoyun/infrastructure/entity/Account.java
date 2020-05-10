@@ -1,5 +1,7 @@
 package com.yunbanke.daoyun.infrastructure.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -26,6 +28,7 @@ public class Account implements Serializable {
     @Column(name = "login_passwd")
     private String loginpasswd;
     @OneToOne(mappedBy = "account")
+    @JsonBackReference
     private User user;
 
     public User getUser() {

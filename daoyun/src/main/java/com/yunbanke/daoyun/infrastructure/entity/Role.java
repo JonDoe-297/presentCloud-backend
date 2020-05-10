@@ -1,5 +1,7 @@
 package com.yunbanke.daoyun.infrastructure.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -21,11 +23,13 @@ public class Role implements Serializable {
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
     @JoinTable(name = "user_role", joinColumns = {@JoinColumn(name = "role_id")},
             inverseJoinColumns = {@JoinColumn(name = "user_Id")})
+    @JsonBackReference
     private List<User> userList;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "role_access", joinColumns = {@JoinColumn(name = "role_id")},
             inverseJoinColumns = {@JoinColumn(name = "access_id")})
+    @JsonBackReference
     private List<Access> accessList;
 
 
