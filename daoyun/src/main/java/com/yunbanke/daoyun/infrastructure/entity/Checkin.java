@@ -22,17 +22,8 @@ public class Checkin implements Serializable {
     private Integer userid;
     @Column(name = "class_num")
     private String classnum;
-
-    @Override
-    public String toString() {
-        return "Info{" +
-                "checkin_id=" + checkinid +
-                ", checkin_is=" + checkinis +
-                ", checkin_date=" + checkindate +
-                ", checkin_user_id='" + userid + '\'' +
-                ", checkin_class='" + classnum + '\'' +
-                '}';
-    }
+    @Column(name = "checkin_info_id")
+    private Integer checkininfoid;
 
     public Integer getCheckinid() {
         return checkinid;
@@ -72,5 +63,13 @@ public class Checkin implements Serializable {
 
     public void setClassnum(String classnum) {
         this.classnum = classnum;
+    }
+
+    public Integer getCheckininfoid() {
+        return checkininfoid;
+    }
+
+    public void setCheckininfoid(Integer checkininfoid) {
+        this.checkininfoid = checkininfoid;
     }
 }

@@ -87,4 +87,9 @@ public class ClassService {
         classRepository.save(c);
         return 1;
     }
+
+    public List<Class> getClassByClassname(String className){
+        return classRepository.getClassesByClassname(className);
+    }
+    // 查询课程
 }

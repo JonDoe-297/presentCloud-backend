@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface ClassRepository extends CrudRepository<Class, Integer> {
     public List<Class> getClassesByClassnum(String classNum);
+    public List<Class> getClassesByClassname(String className);
 }

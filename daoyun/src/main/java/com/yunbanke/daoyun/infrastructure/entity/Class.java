@@ -1,5 +1,7 @@
 package com.yunbanke.daoyun.infrastructure.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -24,6 +26,7 @@ public class Class implements Serializable {
 
     @ManyToMany
     @JoinTable(name="class_student", joinColumns = @JoinColumn(name = "class_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
+//    @JsonBackReference
     private List<User> studentList;
 
     @Override

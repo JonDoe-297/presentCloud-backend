@@ -2,15 +2,14 @@ package com.yunbanke.daoyun.Web;
 
 
 import com.yunbanke.daoyun.Service.ClassService;
+import com.yunbanke.daoyun.infrastructure.Types.FullClass;
 import com.yunbanke.daoyun.infrastructure.entity.Class;
 import com.yunbanke.daoyun.infrastructure.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Random;
 
 @RequestMapping("/class")
 @CrossOrigin
@@ -27,8 +26,8 @@ public class ClassController {
 
 
     // 课程详情
-    @GetMapping("/getClass")
-    public Class getClass(@RequestParam String classNum){
+    @GetMapping("/getClassByClassnum")
+    public Class getClassByClassnum(@RequestParam String classNum){
         return classService.getClassByClassNum(classNum);
     }
 
@@ -40,11 +39,17 @@ public class ClassController {
     }
 
     // 添加学生
-    @PostMapping("/addStudents")
-    public void addStudents(){
+    @PostMapping("/addStudent")
+    public void addStudents(@RequestParam String classNum, @RequestParam Integer userId){
         List<Integer> stu = new ArrayList<>();
-        stu.add(4);
-        classService.addStudents(stu, "9981245");
+        stu.add(userId);
+        classService.addStudents(stu, classNum);
+    }
+
+    // 添加学生
+    @PostMapping("/addStudents")
+    public void addStudents(@RequestParam String classNum, @RequestParam List<Integer> userIdList){
+        classService.addStudents(userIdList, classNum);
     }
 
     // 移除学生
@@ -53,9 +58,38 @@ public class ClassController {
         return classService.removeStudents(stu, classNum);
     }
 
-    // TODO 查询课程
+    // 查询课程（classNun, className）
+    @GetMapping("/searchClass")
+    public List<Class> searchClass(@RequestParam String query){
+        int index = 0;
+        Class aClass = null;
+        List<Class> classList = new ArrayList<>();
+        if(query == null){
+            return classList;
+        }
+        for(index = 0; index < query.length(); index++){
+            if(!Character.isDigit(query.charAt(index))){
+                break;
+            }
+        }
+        if(index < query.length()){
+            classList = classService.getClassByClassname(query);
+        } else {
+            aClass = classService.getClassByClassNum(query);
+            classList.add(aClass);
+        }
+        return classList;
+    }
 
-
+    @RequestMapping("/getClassDetail")
+    public FullClass getClassDetail(@RequestParam String classNum){
+        Class aclass = classService.getClassByClassNum(classNum);
+        User teacher = classService.getTeacherByClassNum(classNum);
+        FullClass fullClass = new FullClass();
+        fullClass.set_class(aclass);
+        fullClass.setTeacher(teacher);
+        return fullClass;
+    }
 
     // TODO 上传资源、课程、权限
 
