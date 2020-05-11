@@ -3,7 +3,9 @@ package com.yunbanke.daoyun.infrastructure.Types;
 import com.yunbanke.daoyun.infrastructure.entity.Class;
 import com.yunbanke.daoyun.infrastructure.entity.User;
 
-public class FullClass {
+import java.io.Serializable;
+
+public class FullClass implements Serializable {
     private User teacher;
     private Class _class;
 

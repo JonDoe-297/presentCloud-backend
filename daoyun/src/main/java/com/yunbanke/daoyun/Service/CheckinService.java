@@ -4,6 +4,7 @@ import com.yunbanke.daoyun.infrastructure.Persistence.CheckinInfoRepository;
 import com.yunbanke.daoyun.infrastructure.Persistence.CheckinRepository;
 import com.yunbanke.daoyun.infrastructure.Persistence.UserRepository;
 import com.yunbanke.daoyun.infrastructure.Types.CheckinResult;
+import com.yunbanke.daoyun.infrastructure.Types.RetResponse;
 import com.yunbanke.daoyun.infrastructure.entity.Checkin;
 import com.yunbanke.daoyun.infrastructure.entity.CheckinInfo;
 import com.yunbanke.daoyun.infrastructure.entity.Class;
@@ -60,8 +61,14 @@ public class CheckinService {
     }
 
     // 创建签到记录
-    public void createStuCheckin(Integer checkinInfoId, String classNum){
-        Class c = classService.getClassByClassNum(classNum);
+    public RetResponse createStuCheckin(Integer checkinInfoId, String classNum){
+        Class c = new Class();
+        RetResponse classRet = classService.getClassByClassNum(classNum);
+        if(classRet.getCode().equals("200")){
+            c = (Class)classRet.getData();
+        } else {
+            return classRet;
+        }
         List<User> stuList = c.getStudentList();
         for(int i = 0; i < stuList.size(); i++){
             Checkin checkin = new Checkin();
@@ -71,6 +78,7 @@ public class CheckinService {
             checkin.setCheckininfoid(checkinInfoId);
             checkinRepository.save(checkin);
         }
+        return new RetResponse();
     }
 
     // 学生签到
