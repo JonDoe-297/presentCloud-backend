@@ -1,4 +1,4 @@
-package com.yunbanke.daoyun.infrastructure.Types;
+package com.yunbanke.daoyun.Web.VO;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Getter;

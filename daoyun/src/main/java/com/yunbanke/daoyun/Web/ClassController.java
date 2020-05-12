@@ -2,12 +2,10 @@ package com.yunbanke.daoyun.Web;
 
 
 import com.yunbanke.daoyun.Service.ClassService;
-import com.yunbanke.daoyun.infrastructure.Types.FullClass;
-import com.yunbanke.daoyun.infrastructure.Types.RetResponse;
+import com.yunbanke.daoyun.Web.VO.FullClassVO;
+import com.yunbanke.daoyun.Web.VO.RetResponse;
 import com.yunbanke.daoyun.infrastructure.entity.Class;
 import com.yunbanke.daoyun.infrastructure.entity.User;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,16 +41,16 @@ public class ClassController {
 
     // 添加学生
     @PostMapping("/addStudent")
-    public RetResponse addStudents(@RequestParam String classNum, @RequestParam Integer userId){
+    public RetResponse addStudents(@RequestParam String classNum, @RequestParam Integer stuId){
         List<Integer> stu = new ArrayList<>();
-        stu.add(userId);
+        stu.add(stuId);
         return classService.addStudents(stu, classNum);
     }
 
     // 添加学生
     @PostMapping("/addStudents")
-    public RetResponse addStudents(@RequestParam String classNum, @RequestParam List<Integer> userIdList){
-        return classService.addStudents(userIdList, classNum);
+    public RetResponse addStudents(@RequestParam String classNum, @RequestParam List<Integer> stuIdList){
+        return classService.addStudents(stuIdList, classNum);
     }
 
     // 移除学生
@@ -65,8 +63,8 @@ public class ClassController {
 
     // 移除学生
     @GetMapping("/removeStudents")
-    public RetResponse removeStudents(@RequestParam String classNum, @RequestParam List<Integer> stu){
-        return classService.removeStudents(stu, classNum);
+    public RetResponse removeStudents(@RequestParam String classNum, @RequestParam List<Integer> stuIdList){
+        return classService.removeStudents(stuIdList, classNum);
     }
 
 
@@ -117,10 +115,10 @@ public class ClassController {
         } else {
             return teacherRet;
         }
-        FullClass fullClass = new FullClass();
-        fullClass.set_class(c);
-        fullClass.setTeacher(teacher);
-        return new RetResponse(fullClass);
+        FullClassVO fullClassVO = new FullClassVO();
+        fullClassVO.set_class(c);
+        fullClassVO.setTeacher(teacher);
+        return new RetResponse(fullClassVO);
     }
 
     // TODO 上传资源、课程、权限

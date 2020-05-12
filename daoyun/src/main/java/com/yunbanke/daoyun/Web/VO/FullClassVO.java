@@ -1,11 +1,11 @@
-package com.yunbanke.daoyun.infrastructure.Types;
+package com.yunbanke.daoyun.Web.VO;
 
 import com.yunbanke.daoyun.infrastructure.entity.Class;
 import com.yunbanke.daoyun.infrastructure.entity.User;
 
 import java.io.Serializable;
 
-public class FullClass implements Serializable {
+public class FullClassVO implements Serializable {
     private User teacher;
     private Class _class;
 

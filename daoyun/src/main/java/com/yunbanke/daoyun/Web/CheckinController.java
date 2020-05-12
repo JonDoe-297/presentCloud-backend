@@ -1,8 +1,8 @@
 package com.yunbanke.daoyun.Web;
 
 import com.yunbanke.daoyun.Service.CheckinService;
-import com.yunbanke.daoyun.infrastructure.Types.CheckinResult;
-import com.yunbanke.daoyun.infrastructure.Types.RetResponse;
+import com.yunbanke.daoyun.Web.VO.CheckinResultVO;
+import com.yunbanke.daoyun.Web.VO.RetResponse;
 import com.yunbanke.daoyun.infrastructure.entity.Checkin;
 import com.yunbanke.daoyun.infrastructure.entity.CheckinInfo;
 import org.slf4j.Logger;
@@ -34,7 +34,7 @@ public class CheckinController {
         Date nowtime = new Date();
         List<CheckinInfo> checkinInfos = checkinService.getCheckinInfoList(classNum);
         for(int i = 0; i < checkinInfos.size(); i++){
-            if(checkinInfos.get(i).getIsvalid() == 1){
+            if(checkinInfos.get(i).getIsvalid() == 1 || checkinInfos.get(i).getIsvalid() == 0){
                 logger.error("已经有在进行的签到任务。");
                 return new RetResponse("2003", "已经有在进行的签到任务"); // 已经有在进行的签到任务。
             }
@@ -60,23 +60,23 @@ public class CheckinController {
             // 设定签到开始时间
             if(nowtime.before(checkinInfo.getStarttime())){
 
-                logger.info("签到（" + checkinInfo.getCheckininfoid() + "）未到起始时间：" + checkinInfo.getStarttime() + "，未进行。");
+                logger.info("签到（" + checkinInfo.getCheckininfoid() + " " + checkinInfo.getClassnum()  + "）未到起始时间：" + checkinInfo.getStarttime() + "，未进行。");
                 TimerTask taskStart = new TimerTask() {
                     @Override
                     public void run() {
 
-                        logger.info("设定签到（" + checkinInfo.getCheckininfoid() + "）的有效值为 1，开始进行。");
+                        logger.info("设定签到（" + checkinInfo.getCheckininfoid() + " " + checkinInfo.getClassnum()  + "）的有效值为 1，开始进行。");
                         checkinService.setCheckinInfoValid(1, checkinInfo.getCheckininfoid());
                     }
                 };
                 Timer timerStart = new Timer(true);
                 timerStart.schedule(taskStart, checkinInfo.getStarttime());
             } else {
-                logger.info("设定签到（" + checkinInfo.getCheckininfoid() + "）的有效值为 1，开始进行。");
+                logger.info("设定签到（" + checkinInfo.getCheckininfoid() + " " + checkinInfo.getClassnum() + "）的有效值为 1，开始进行。");
                 checkinService.setCheckinInfoValid(1, checkinInfo.getCheckininfoid());
             }
         } else {
-            logger.info("设定签到（" + checkinInfo.getCheckininfoid() + "）已过期" + checkinInfo.getEndtime() + "，设定签到有效值为 0。");
+            logger.info("设定签到（" + checkinInfo.getCheckininfoid() + " " + checkinInfo.getClassnum()  + "）已过期" + checkinInfo.getEndtime() + "，设定签到有效值为 0。");
         }
         return new RetResponse("200", "签到设定成功");
     }
@@ -130,11 +130,11 @@ public class CheckinController {
         if(classNum == null || checkinInfoId == 0){
             return new RetResponse("2002", "输入不合法");
         }
-        List<CheckinResult> checkinResultList = checkinService.getCheckinResult(classNum, checkinInfoId);
-        if(checkinResultList.size() == 0){
+        List<CheckinResultVO> checkinResultVOList = checkinService.getCheckinResult(classNum, checkinInfoId);
+        if(checkinResultVOList.size() == 0){
             return new RetResponse("2001", "该课程" + classNum + "签到信息未找到");
         } else {
-            return new RetResponse(checkinResultList);
+            return new RetResponse(checkinResultVOList);
         }
     }
 }

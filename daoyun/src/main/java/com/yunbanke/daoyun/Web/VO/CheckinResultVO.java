@@ -1,9 +1,9 @@
-package com.yunbanke.daoyun.infrastructure.Types;
+package com.yunbanke.daoyun.Web.VO;
 
 import java.io.Serializable;
 import java.util.Date;
 
-public class CheckinResult implements Serializable {
+public class CheckinResultVO implements Serializable {
     String name;
     int chenkinIs;
     Date checkinDate;

@@ -3,8 +3,8 @@ package com.yunbanke.daoyun.Service;
 import com.yunbanke.daoyun.infrastructure.Persistence.CheckinInfoRepository;
 import com.yunbanke.daoyun.infrastructure.Persistence.CheckinRepository;
 import com.yunbanke.daoyun.infrastructure.Persistence.UserRepository;
-import com.yunbanke.daoyun.infrastructure.Types.CheckinResult;
-import com.yunbanke.daoyun.infrastructure.Types.RetResponse;
+import com.yunbanke.daoyun.Web.VO.CheckinResultVO;
+import com.yunbanke.daoyun.Web.VO.RetResponse;
 import com.yunbanke.daoyun.infrastructure.entity.Checkin;
 import com.yunbanke.daoyun.infrastructure.entity.CheckinInfo;
 import com.yunbanke.daoyun.infrastructure.entity.Class;
@@ -92,21 +92,21 @@ public class CheckinService {
     }
 
     // 获得班级签到结果
-    public List<CheckinResult> getCheckinResult(String classNum, Integer checkininfoid){
-        List<CheckinResult> checkinResults = new ArrayList<>();
+    public List<CheckinResultVO> getCheckinResult(String classNum, Integer checkininfoid){
+        List<CheckinResultVO> checkinResultVOS = new ArrayList<>();
         List<Checkin> checkinList = checkinRepository.getCheckinsByClassnumAndCheckininfoid(classNum, checkininfoid);
         for(int i = 0; i < checkinList.size(); i++){
             Checkin checkin = checkinList.get(i);
-            CheckinResult checkinResult = new CheckinResult();
+            CheckinResultVO checkinResultVO = new CheckinResultVO();
             User user = userRepository.getUsersByUserid(checkin.getUserid()).get(0);
-            checkinResult.setName(user.getUsername());
-            checkinResult.setChenkinIs(checkin.getCheckinis());
+            checkinResultVO.setName(user.getUsername());
+            checkinResultVO.setChenkinIs(checkin.getCheckinis());
             if(checkin.getCheckinis() == 1){
-                checkinResult.setCheckinDate(checkin.getCheckindate());
+                checkinResultVO.setCheckinDate(checkin.getCheckindate());
             }
-            checkinResult.setClassNum(checkin.getClassnum());
-            checkinResults.add(checkinResult);
+            checkinResultVO.setClassNum(checkin.getClassnum());
+            checkinResultVOS.add(checkinResultVO);
         }
-        return checkinResults;
+        return checkinResultVOS;
     }
 }

@@ -4,7 +4,7 @@ package com.yunbanke.daoyun.Service;
 
 import com.yunbanke.daoyun.infrastructure.Persistence.ClassRepository;
 import com.yunbanke.daoyun.infrastructure.Persistence.UserRepository;
-import com.yunbanke.daoyun.infrastructure.Types.RetResponse;
+import com.yunbanke.daoyun.Web.VO.RetResponse;
 import com.yunbanke.daoyun.infrastructure.entity.Class;
 import com.yunbanke.daoyun.infrastructure.entity.User;
 import org.slf4j.Logger;
