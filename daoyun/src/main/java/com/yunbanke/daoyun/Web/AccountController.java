@@ -1,5 +1,6 @@
 package com.yunbanke.daoyun.Web;
 
+import com.alibaba.fastjson.JSONObject;
 import com.yunbanke.daoyun.infrastructure.Persistence.RoleRepository;
 import com.yunbanke.daoyun.infrastructure.Persistence.UserRepository;
 import com.yunbanke.daoyun.infrastructure.Response.CommonReturnType;
@@ -41,12 +42,13 @@ public class AccountController {
     }
 
     /**
-     * @param username 用户账号（邮箱、手机号等）
-     * @param password 密码
-     * @return 1 登录成功
+     * @param jsonObject 用户账号（邮箱、手机号等）
+     * @return 登录成功
      */
     @PostMapping(path = "/login")
-    public String login(@RequestParam String username, @RequestParam String password, Model model) {
+    public String login(@RequestBody JSONObject jsonObject, Model model) {
+        String username = jsonObject.getString("username");
+        String password = jsonObject.getString("password");
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(username, password);
         token.setRememberMe(true);
@@ -68,7 +70,12 @@ public class AccountController {
     }
 
     @PostMapping(path = "/register")
-    public String register(String username, String password, String name, String sno, String role, Model model) {
+    public String register(@RequestBody JSONObject jsonObject, Model model) {
+        String username = jsonObject.getString("username");
+        String password = jsonObject.getString("password");
+        String name = jsonObject.getString("name");
+        String role = jsonObject.getString("role");
+        String sno = jsonObject.getString("sno");
         User user = new User();
         Account account = accountRepository.findAccountByLoginphone(username);
         if (account != null) {
