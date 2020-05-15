@@ -4,82 +4,70 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.io.Serializable;
-
 
 @Entity
-public class Dictionary implements Serializable {
+public class Dictionary {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
-    private Integer dic_id;
-    // 关键字
-    private String dic_keyword;
-    // 配置值
-    private String dic_value;
-    // 详细描述说明
-    private String dic_discription;
-    // 类型
-    private Integer dic_type;
-    // 是否为默认值
-    private Integer dic_isdefault;
+    private long dicId;
+    private String dicCode;
+    private String dicName;
+    private String dicDiscription;
+    private long dicDefaultId;
 
     @Override
     public String toString() {
-        return "Dictionary{" +
-                "dic_id=" + dic_id +
-                ", dic_keyword='" + dic_keyword + '\'' +
-                ", dic_value='" + dic_value + '\'' +
-                ", dic_discription='" + dic_discription + '\'' +
-                ", dic_type=" + dic_type +
-                ", dic_isdefault=" + dic_isdefault +
-                '}';
+        return "{" +
+                "'dicId'=" + dicId +","+
+                "'dicCode'='" + dicCode +"',"+
+                "'dicName'='" + dicName +"',"+
+                "'dicDiscription'='" + dicDiscription  +"',"+
+                "'dicDefaultId'=" + dicDefaultId +
+                "}";
     }
 
-    public Integer getDic_id() {
-        return dic_id;
+    public long getDicId() {
+        return dicId;
     }
 
-    public void setDic_id(Integer dic_id) {
-        this.dic_id = dic_id;
+    public void setDicId(long dicId) {
+        this.dicId = dicId;
     }
 
-    public String getDic_keyword() {
-        return dic_keyword;
+
+    public String getDicCode() {
+        return dicCode;
     }
 
-    public void setDic_keyword(String dic_keyword) {
-        this.dic_keyword = dic_keyword;
+    public void setDicCode(String dicCode) {
+        this.dicCode = dicCode;
     }
 
-    public String getDic_value() {
-        return dic_value;
+
+    public String getDicName() {
+        return dicName;
     }
 
-    public void setDic_value(String dic_value) {
-        this.dic_value = dic_value;
+    public void setDicName(String dicName) {
+        this.dicName = dicName;
     }
 
-    public String getDic_discription() {
-        return dic_discription;
+
+    public String getDicDiscription() {
+        return dicDiscription;
     }
 
-    public void setDic_discription(String dic_discription) {
-        this.dic_discription = dic_discription;
+    public void setDicDiscription(String dicDiscription) {
+        this.dicDiscription = dicDiscription;
     }
 
-    public Integer getDic_type() {
-        return dic_type;
+
+    public long getDicDefaultId() {
+        return dicDefaultId;
     }
 
-    public void setDic_type(Integer dic_type) {
-        this.dic_type = dic_type;
+    public void setDicDefaultId(long dicDefaultId) {
+        this.dicDefaultId = dicDefaultId;
     }
 
-    public Integer getDic_isdefault() {
-        return dic_isdefault;
-    }
-
-    public void setDic_isdefault(Integer dic_isdefault) {
-        this.dic_isdefault = dic_isdefault;
-    }
 }
