@@ -55,7 +55,7 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
             String requestURI = httpServletRequest.getRequestURI();
             //logger.info("当前请求 {} Authorization属性(Token)为空 请求类型 {}", requestURI, httpMethod);
             // mustLoginFlag = true 开启任何请求必须登录才可访问
-            final Boolean mustLoginFlag = false;
+            final boolean mustLoginFlag = false;
             if (mustLoginFlag) {
                 this.response401(response, "请先登录");
                 return false;
@@ -73,6 +73,7 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
     @Override
     protected boolean isLoginAttempt(ServletRequest request, ServletResponse response) {
         String token = this.getAuthzHeader(request);
+
         return token != null;
     }
 

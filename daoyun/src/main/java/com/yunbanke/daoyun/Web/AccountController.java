@@ -2,6 +2,7 @@ package com.yunbanke.daoyun.Web;
 
 import com.alibaba.fastjson.JSONObject;
 import com.yunbanke.daoyun.Web.VO.ResultMap;
+import com.yunbanke.daoyun.Web.VO.UserInfoVO;
 import com.yunbanke.daoyun.infrastructure.Persistence.RoleRepository;
 import com.yunbanke.daoyun.infrastructure.Persistence.UserRepository;
 import com.yunbanke.daoyun.infrastructure.Util.JwtUtil;
@@ -91,19 +92,24 @@ public class AccountController {
             String token = JwtUtil.sign(username, currentTimeMillis);
             httpServletResponse.setHeader("Authorization", token);
             httpServletResponse.setHeader("Access-Control-Expose-Headers", "Authorization");
-            return new ResponseBean(HttpStatus.OK.value(), "登录成功(Login Success.)", null);
+
+            return new ResponseBean(HttpStatus.OK.value(), "登录成功(Login Success.)", UserInfoVO.convertFromUser(account.getUser()));
         } else {
             throw new CustomUnauthorizedException("帐号或密码错误");
         }
 
     }
 
-    @GetMapping("/article")
-    public ResponseBean article() {
+    @GetMapping("/getInfo")
+    public ResponseBean getInfo() {
         Subject subject = SecurityUtils.getSubject();
         // 登录了返回true
         if (subject.isAuthenticated()) {
-            return new ResponseBean(HttpStatus.OK.value(), "您已经登录了(You are already logged in)", null);
+            String token = subject.getPrincipal().toString();
+            String username = JwtUtil.getClaim(token, "account");
+            //System.out.println(username);
+            Account account = accountRepository.findAccountByLoginphone(username);
+            return new ResponseBean(HttpStatus.OK.value(), "您已经登录了(You are already logged in)", UserInfoVO.convertFromUser(account.getUser()));
         } else {
             return new ResponseBean(HttpStatus.OK.value(), "你是游客(You are guest)", null);
         }
@@ -115,7 +121,7 @@ public class AccountController {
     }
 
     @PostMapping(path = "/register")
-    public String register(@RequestBody JSONObject jsonObject, Model model) {
+    public ResponseBean register(@RequestBody JSONObject jsonObject, Model model) {
         String username = jsonObject.getString("username");
         String password = jsonObject.getString("password");
         String name = jsonObject.getString("name");
@@ -124,8 +130,7 @@ public class AccountController {
         User user = new User();
         Account account = accountRepository.findAccountByLoginphone(username);
         if (account != null) {
-            model.addAttribute("msg", "账号存在");
-            return "register";
+            return new ResponseBean(HttpStatus.OK.value(), "账号存在", null);
         }
         account = new Account();
         account.setLoginphone(username);
@@ -142,7 +147,7 @@ public class AccountController {
 
         model.addAttribute("meg", "注册成功");
         //System.out.println("注册成功");
-        return "login";
+        return new ResponseBean(HttpStatus.OK.value(), "注册成功", null);
     }
 
 }
