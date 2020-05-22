@@ -9,11 +9,11 @@ import javax.persistence.Id;
 public class Dictionary {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
-    private long dicId;
+    private Integer dicId;
     private String dicCode;
     private String dicName;
     private String dicDiscription;
-    private long dicDefaultId;
+    private Integer dicDefaultId;
 
     @Override
     public String toString() {
@@ -26,11 +26,11 @@ public class Dictionary {
                 "}";
     }
 
-    public long getDicId() {
+    public Integer getDicId() {
         return dicId;
     }
 
-    public void setDicId(long dicId) {
+    public void setDicId(Integer dicId) {
         this.dicId = dicId;
     }
 
@@ -62,11 +62,11 @@ public class Dictionary {
     }
 
 
-    public long getDicDefaultId() {
+    public Integer getDicDefaultId() {
         return dicDefaultId;
     }
 
-    public void setDicDefaultId(long dicDefaultId) {
+    public void setDicDefaultId(Integer dicDefaultId) {
         this.dicDefaultId = dicDefaultId;
     }
 

@@ -10,29 +10,29 @@ import javax.persistence.Id;
 public class DictionaryDetail {
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Id
-  private long dicDetailId;
+  private Integer dicDetailId;
 
-  private long dicTypeId;
+  private Integer dicTypeId;
   private String dicDetailCode;
   private String dicDetailName;
-  private long dicDetailSerialNumber;
-  private long dicDetailState;
+  private Integer dicDetailSerialNumber;
+  private Integer dicDetailState;
 
 
-  public long getDicDetailId() {
+  public Integer getDicDetailId() {
     return dicDetailId;
   }
 
-  public void setDicDetailId(long dicDetailId) {
+  public void setDicDetailId(Integer dicDetailId) {
     this.dicDetailId = dicDetailId;
   }
 
 
-  public long getDicTypeId() {
+  public Integer getDicTypeId() {
     return dicTypeId;
   }
 
-  public void setDicTypeId(long dicTypeId) {
+  public void setDicTypeId(Integer dicTypeId) {
     this.dicTypeId = dicTypeId;
   }
 
@@ -55,20 +55,20 @@ public class DictionaryDetail {
   }
 
 
-  public long getDicDetailSerialNumber() {
+  public Integer getDicDetailSerialNumber() {
     return dicDetailSerialNumber;
   }
 
-  public void setDicDetailSerialNumber(long dicDetailSerialNumber) {
+  public void setDicDetailSerialNumber(Integer dicDetailSerialNumber) {
     this.dicDetailSerialNumber = dicDetailSerialNumber;
   }
 
 
-  public long getDicDetailState() {
+  public Integer getDicDetailState() {
     return dicDetailState;
   }
 
-  public void setDicDetailState(long dicDetailState) {
+  public void setDicDetailState(Integer dicDetailState) {
     this.dicDetailState = dicDetailState;
   }
 

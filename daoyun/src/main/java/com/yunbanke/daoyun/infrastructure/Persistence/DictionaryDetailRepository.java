@@ -7,5 +7,7 @@ import java.util.List;
 
 
 public interface DictionaryDetailRepository extends CrudRepository<DictionaryDetail, Integer> {
-    List<DictionaryDetail> findByDicTypeId(long DicTypeId);
+    List<DictionaryDetail> findByDicTypeId(Integer DicTypeId);
+    DictionaryDetail findByDicTypeIdAndDicDetailCode(Integer DicTypeId,String code);
+    void deleteByDicTypeId(Integer DicTypeId);
 }
