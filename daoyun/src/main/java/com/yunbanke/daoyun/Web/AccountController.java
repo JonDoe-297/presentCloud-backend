@@ -111,7 +111,7 @@ public class AccountController {
             Account account = accountRepository.findAccountByLoginphone(username);
             return new ResponseBean(HttpStatus.OK.value(), "您已经登录了(You are already logged in)", UserInfoVO.convertFromUser(account.getUser()));
         } else {
-            return new ResponseBean(HttpStatus.OK.value(), "你是游客(You are guest)", null);
+            return new ResponseBean(HttpStatus.OK.value(), "你是游客(You are guest)", subject.getPrincipal().toString());
         }
     }
 
@@ -121,7 +121,7 @@ public class AccountController {
     }
 
     @PostMapping(path = "/register")
-    public ResponseBean register(@RequestBody JSONObject jsonObject, Model model) {
+    public ResponseBean register(@RequestBody JSONObject jsonObject) {
         String username = jsonObject.getString("username");
         String password = jsonObject.getString("password");
         String name = jsonObject.getString("name");
@@ -144,8 +144,6 @@ public class AccountController {
         user.setUsername(name);
         user.setRoleList(roleList);
         userRepository.saveAndFlush(user);
-
-        model.addAttribute("meg", "注册成功");
         //System.out.println("注册成功");
         return new ResponseBean(HttpStatus.OK.value(), "注册成功", null);
     }

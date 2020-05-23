@@ -38,6 +38,7 @@ public class ShiroConfig {
             authc表示用户必须认证过才能访问
 //         */
         filterChainDefinitionMap.put("/login", "anon");
+        filterChainDefinitionMap.put("/register", "anon");
         filterChainDefinitionMap.put("/**", "jwt");
 //        filterChainDefinitionMap.put("/static/**", "anon"); //静态资源所有人都可以访问，这样前端的css，JavaScript等代码才能被访问到
 //        filterChainDefinitionMap.put("/login", "anon"); //登录url所有人都可以访问
