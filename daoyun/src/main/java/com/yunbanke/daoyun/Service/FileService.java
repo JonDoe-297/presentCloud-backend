@@ -31,7 +31,7 @@ public class FileService {
         try {
             if (file.isEmpty()) {
                 logger.error("the file is empty");
-                return new RetResponse("20004", "文件为空");
+                return new RetResponse("2007", "传输错误：文件为空");
             }
             String fileName = file.getOriginalFilename();
             String suffixname = fileName.substring(fileName.lastIndexOf("."));
@@ -53,14 +53,14 @@ public class FileService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return new RetResponse("50005", "upload failed.");
+        return new RetResponse("5002", "服务器文件存储错误。");
     }
 
     public RetResponse getFilesByUserId(Integer userId){
         List<FilePath> filePaths = new ArrayList<>();
         filePaths = filepathRepository.getFilePathsByUserid(userId);
         if(filePaths.isEmpty()){
-            return new RetResponse("20007", "未找到该用户文件记录。");
+            return new RetResponse("2007", "参数错误：未找到该用户文件记录。");
         } else {
             return new RetResponse("200", "success.", filePaths);
         }

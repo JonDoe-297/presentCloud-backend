@@ -39,6 +39,12 @@ public class ClassController {
         return classService.getTeacherByClassNum(classNum);
     }
 
+    // 获得用户课程列表
+    @GetMapping("/getClassList")
+    public RetResponse getClassList(@RequestParam Integer userId){
+        return classService.getClassList(userId);
+    }
+
     // 添加学生
     @PostMapping("/addStudent")
     public RetResponse addStudents(@RequestParam String classNum, @RequestParam Integer stuId){

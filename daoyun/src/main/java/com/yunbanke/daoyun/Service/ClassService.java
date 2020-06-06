@@ -56,6 +56,14 @@ public class ClassService {
         }
     }
 
+    public RetResponse getClassList(Integer userId){
+        List<Class> classes = classRepository.getClassesByUserid(userId);
+        if(classes.isEmpty()){
+            return new RetResponse("200", "User (" + userId + ") has no class");
+        }
+        return new RetResponse("200", "success", classes);
+    }
+
     // 添加学生
     public RetResponse addStudents(List<Integer> stu, String classNum){
         RetResponse classRet = getClassByClassNum(classNum);
