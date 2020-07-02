@@ -19,7 +19,7 @@ public class ClassController {
     @Autowired
     private ClassService classService;
 
-    @PostMapping("/addClass")
+    @GetMapping("/addClass")
     public RetResponse addClass(@RequestParam String className, @RequestParam Integer userId){
         return classService.addClass(className, userId);
     }

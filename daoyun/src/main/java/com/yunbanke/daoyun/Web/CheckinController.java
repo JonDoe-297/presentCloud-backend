@@ -33,13 +33,19 @@ public class CheckinController {
         int isvalid = 0;
         Date nowtime = new Date();
         List<CheckinInfo> checkinInfos = checkinService.getCheckinInfoList(classNum);
+        logger.info("startTime: " + startTime);
+        logger.info("endTime: " + endTime);
         for(int i = 0; i < checkinInfos.size(); i++){
             if(checkinInfos.get(i).getIsvalid() == 1 || checkinInfos.get(i).getIsvalid() == 0){
-                logger.error("已经有在进行的签到任务。");
+                logger.error("There are already checkin tasks in progress.");
                 return new RetResponse("2003", "已经有在进行的签到任务"); // 已经有在进行的签到任务。
             }
         }
-        if(startTime == null || endTime == null || startTime.after(endTime) || nowtime.after(endTime)){
+        if(startTime == null || endTime == null){
+            logger.error("The times is null");
+            return new RetResponse("2004", "设定时间为空");
+        }
+        if(startTime.after(endTime) || nowtime.after(endTime)){
             logger.error("设定时间不正确。");
             return new RetResponse("2004", "设定时间不正确");
         }
