@@ -1,5 +1,6 @@
 package com.yunbanke.daoyun.Web.VO;
 
+import com.yunbanke.daoyun.infrastructure.entity.Role;
 import com.yunbanke.daoyun.infrastructure.entity.User;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,6 +9,7 @@ import org.springframework.beans.BeanUtils;
 import javax.persistence.Column;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -27,6 +29,8 @@ public class UserInfoVO implements Serializable {
     private String userschool;
 
     private String userDepartment;
+
+    private List<Role> roleList;
 
     public UserInfoVO() {
     }

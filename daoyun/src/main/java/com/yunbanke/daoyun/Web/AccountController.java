@@ -29,7 +29,6 @@ import java.util.List;
 
 //@Controller
 @RestController
-//@CrossOrigin
 public class AccountController {
     @Autowired
     private AccountRepository accountRepository;
@@ -52,22 +51,6 @@ public class AccountController {
      * @param jsonObject 用户账号（邮箱、手机号等）
      * @return 登录成功
      */
-//    @PostMapping(path = "/login")
-//    public ResultMap login(@RequestBody JSONObject jsonObject) {
-//        String username = jsonObject.getString("username");
-//        String password = jsonObject.getString("password");
-//        Subject subject = SecurityUtils.getSubject();
-//        UsernamePasswordToken token = new UsernamePasswordToken(username, password);
-//        token.setRememberMe(true);
-//        try {
-//            subject.login(token);
-//            System.out.println("登录成功");
-//            return resultMap.success().code(200).token(JwtUtil.createToken(username));
-//        } catch (AuthenticationException | UnsupportedEncodingException error) {
-//            System.out.println("登录失败");
-//            return  resultMap.fail().code(401).message("账号或密码错误");
-//        }
-//    }
     @PostMapping(path = "/login")
     public ResponseBean login(@RequestBody JSONObject jsonObject, HttpServletResponse httpServletResponse) {
         String username = jsonObject.getString("username");
@@ -107,7 +90,6 @@ public class AccountController {
         if (subject.isAuthenticated()) {
             String token = subject.getPrincipal().toString();
             String username = JwtUtil.getClaim(token, "account");
-            //System.out.println(username);
             Account account = accountRepository.findAccountByLoginphone(username);
             return new ResponseBean(HttpStatus.OK.value(), "您已经登录了(You are already logged in)", UserInfoVO.convertFromUser(account.getUser()));
         } else {
@@ -144,7 +126,6 @@ public class AccountController {
         user.setUsername(name);
         user.setRoleList(roleList);
         userRepository.saveAndFlush(user);
-        //System.out.println("注册成功");
         return new ResponseBean(HttpStatus.OK.value(), "注册成功", null);
     }
 
