@@ -59,7 +59,7 @@ public class User implements Serializable {
 
     @JsonIgnore
     @ManyToMany(mappedBy = "studentList")
-    private List<Class> classList;
+    private List<Class> classlist;
 
 
     @Transient
@@ -83,12 +83,12 @@ public class User implements Serializable {
         this.userDepartment = userDepartment;
     }
 
-    public List<Class> getClassList() {
-        return classList;
+    public List<Class> getClasslist() {
+        return classlist;
     }
 
-    public void setClassList(List<Class> classList) {
-        this.classList = classList;
+    public void setClasslist(List<Class> classlist) {
+        this.classlist = classlist;
     }
 
     public Account getAccount() {

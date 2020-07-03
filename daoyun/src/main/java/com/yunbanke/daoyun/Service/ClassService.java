@@ -95,6 +95,20 @@ public class ClassService {
         }
     }
 
+    // 获取加入的课程
+    public RetResponse getClassesByStudentList(Integer userid){
+        List<User> users = new ArrayList();
+        List<Integer> stuList = new ArrayList<>();
+        stuList.add(userid);
+//        c = classRepository.getClassesByStudentList(stuList);
+        users = userRepository.getUsersByUserid(userid);
+        if(users.size() == 0){
+            return new RetResponse("2002", "未找到改用户");
+        }
+        logger.info("用户加入的课程：" + users.get(0).getClasslist().get(0).getClassname());
+        return new RetResponse("200", "加入课程列表", users.get(0).getClasslist());
+    }
+
     //
     public RetResponse getTeacherByClassNum(String classNum){
         RetResponse classRet = getClassByClassNum(classNum);
