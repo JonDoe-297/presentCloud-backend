@@ -72,7 +72,7 @@ public class ClassService {
             return classRet;
         } else {
             Class c = (Class)classRet.getData();
-            List<User> students = new ArrayList<>();
+            List<User> students = c.getStudentList();
             for(int i = 0; i < stu.size(); i++){
                 List<User> _student = userRepository.getUsersByUserid(stu.get(i));
                 if(_student.isEmpty()){

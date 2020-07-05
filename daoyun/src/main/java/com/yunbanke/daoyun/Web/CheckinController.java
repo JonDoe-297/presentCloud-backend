@@ -8,8 +8,13 @@ import com.yunbanke.daoyun.infrastructure.entity.CheckinInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @RequestMapping("/checkin")
@@ -25,6 +30,14 @@ public class CheckinController {
     }
 
     Logger logger = LoggerFactory.getLogger(CheckinController.class);
+
+//  class  @InitBinder
+//    public void initBinder(WebDataBinder binder, WebRequest request) {
+//
+//        //转换日期
+//        DateFormat dateFormat=new SimpleDateFormat("EEE MMM dd yyyy HH:mm:ss z");
+//        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));// CustomDateEditor为自定义日期编辑器
+//    }
 
 
     // TODO 签到课程、时间、签到记录、成员签到列表、签到结果
@@ -97,7 +110,7 @@ public class CheckinController {
         if(checkinInfos.size() == 0){
             return new RetResponse("2001", "该课程" + classNum + "签到信息未找到");
         }
-        for(int i = checkinInfos.size() - 1; i > 0; i--){
+        for(int i = checkinInfos.size() - 1; i >= 0; i--){
             CheckinInfo checkinInfo = checkinInfos.get(i);
             if(checkinInfo.getIsvalid() == 1){
                 if(checkinInfo.getCode() == null || checkinInfo.getCode().equals(code)){
@@ -112,7 +125,7 @@ public class CheckinController {
                 }
             }
         }
-        return new RetResponse("2001", "该课程" + classNum + "签到信息未找到");
+        return new RetResponse("2005", "该课程" + classNum + "签到失败，签到已过期");
     }
 
     // 获取签到信息列表
